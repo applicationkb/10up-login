@@ -7,11 +7,17 @@ Author: Katelynn M. Barlowe
 
 defined( 'ABSPATH' ) or exit;
 
+/*
+ *  Adds links for favicon to the document head.
+ */
 function tenup_icon() { ?>
     <link rel="shortcut icon" href="<?php echo plugins_url( 'images/favicon.ico', __FILE__);?>"/>
 <?php }
 add_action( 'login_head', 'tenup_icon' );
 
+/*
+ *  Adds links for fonts, styles, jquery and custom javascript files to the document head.
+ */
 function tenup_scripts() { 
     // Styles
 	wp_enqueue_style( '10up-google-fonts', 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500|Merriweather:300,300i', false );  
@@ -23,7 +29,9 @@ function tenup_scripts() {
 }
 add_action( 'login_enqueue_scripts', 'tenup_scripts' );
 
-
+/*
+ * Outputs a modal div and mask and the beginning of a page wrapper.
+ */
 function tenup_header() { ?>
 	<div class="modal">
 		<div class="inner">
@@ -44,6 +52,9 @@ function tenup_header() { ?>
 add_action( 'login_header', 'tenup_header' );
 
 
+/*
+ * Outputs the end of the page wrapper.
+ */
 function tenup_footer() { ?>
 	</div> <!-- End #wrapper -->
    <?php
@@ -51,6 +62,10 @@ function tenup_footer() { ?>
 add_action( 'login_footer', 'tenup_footer' );
 
 
+/*
+ * This function arrests a user successful login and sends the username and 
+ * name (if set) back to the ajax call.
+ */
 function tenup_pass_user_data($user_login, $user) {    
     $current_user = wp_get_current_user();
     echo '<div id="name">' . $user->user_firstname . '</div>';    
